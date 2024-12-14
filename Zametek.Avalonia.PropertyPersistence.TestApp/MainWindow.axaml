@@ -1,0 +1,216 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:z="clr-namespace:Zametek.Avalonia.PropertyPersistence;assembly=Zametek.Avalonia.PropertyPersistence"
+        MinHeight="550"
+        MinWidth="600"
+		xmlns:sys="using:System"
+		xmlns:vm="using:Zametek.Avalonia.PropertyPersistence.TestApp"
+        x:DataType="vm:Main"
+		x:Name="MyWindow"
+        z:PropertyState.Uid="myWindowId-WithNamespacing"
+		z:PropertyState.Mode="Persisted"
+        z:PropertyState.IsNamespacingEnabled="True"
+		Width="{z:PropertyState Default=700}"
+		Height="{z:PropertyState Default=650}"
+        x:Class="Zametek.Avalonia.PropertyPersistence.TestApp.MainWindow"
+        Title="Zametek.Avalonia.PropertyPersistence.TestApp">
+	<DockPanel x:Name="RootPanel"
+               Margin="11">
+		<HeaderedContentControl DockPanel.Dock="Top"
+								Margin="0,0,0,7">
+			<HeaderedContentControl.Header>
+				<TextBlock z:PropertyState.Uid="myGroupBoxHeaderId-WithNamespacing"
+                           z:PropertyState.Mode="Persisted"
+                           z:PropertyState.IsNamespacingEnabled="True"
+                           Text="{z:PropertyState Default=Height}"/>
+			</HeaderedContentControl.Header>
+			<DockPanel Margin="7">
+				<DockPanel DockPanel.Dock="Top"
+                           Margin="0,0,0,7">
+					<TextBlock Text="Height: 500 (Default)"
+                               VerticalAlignment="Center"
+                               DockPanel.Dock="Left"/>
+					<Button Content="Increment ViewModel 'MyHeight'"
+                            Height="23"
+                            Width="200"
+                            Command="{Binding Path=HeightIncrementCommand, Mode=OneWay}"
+                            DockPanel.Dock="Right" />
+					<Grid />
+				</DockPanel>
+				<DockPanel DockPanel.Dock="Top"
+                           Margin="0,0,0,7">
+					<TextBlock Text="MinHeight: "
+                               VerticalAlignment="Center"
+                               DockPanel.Dock="Left"/>
+					<TextBlock Text="{Binding ElementName=MyWindow, Path=MinHeight, Mode=OneWay}"
+                               VerticalAlignment="Center"
+                               DockPanel.Dock="Left" />
+					<Label Content="{Binding Path=HeightIncrement, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                           VerticalContentAlignment="Center"
+                           HorizontalContentAlignment="Right"
+                           Height="23"
+                           Width="50"
+                           DockPanel.Dock="Right" />
+					<TextBlock Text="VM 'HeightIncrement' value: "
+                               VerticalAlignment="Center"
+                               DockPanel.Dock="Right"/>
+					<Grid />
+				</DockPanel>
+				<DockPanel DockPanel.Dock="Top"
+                           Margin="0,0,0,7">
+					<TextBlock Text="Height: "
+                               VerticalAlignment="Center"
+                               DockPanel.Dock="Left"/>
+					<TextBox Text="{Binding ElementName=MyWindow, Path=Height, Mode=OneWay}"
+                               VerticalAlignment="Center"
+                               DockPanel.Dock="Left" />
+					<TextBlock Text=" (Element 'MyWindow' Height)"
+                               VerticalAlignment="Center"
+                               DockPanel.Dock="Left"/>
+					<TextBox z:PropertyState.Uid="myIncrementTextBoxId-WithNamespacingAnchoredToRootPanel"
+                             z:PropertyState.Mode="Persisted"
+                             z:PropertyState.IsNamespacingEnabled="True"
+                             z:PropertyState.VisualAnchor="{Binding ElementName=RootPanel}"
+							 Text="{z:PropertyState Default=20}"
+                             VerticalContentAlignment="Center"
+                             HorizontalContentAlignment="Right"
+                             Height="23"
+                             Width="50"
+                             DockPanel.Dock="Right" />
+					<!--Text="{z:PropertyState Default=20, Binding={Binding Path=HeightIncrement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}}"-->
+					<TextBlock Text="Height: "
+                               VerticalAlignment="Center"
+                               DockPanel.Dock="Right"/>
+					<Grid />
+				</DockPanel>
+				<DockPanel DockPanel.Dock="Top">
+					<TextBlock Text="Height: "
+                               VerticalAlignment="Center"
+                               DockPanel.Dock="Left"/>
+					<TextBlock Text="{Binding Path=MyHeight, Mode=OneWay}"
+                               VerticalAlignment="Center"
+                               DockPanel.Dock="Left" />
+					<TextBlock Text=" (VM 'MyHeight' value)"
+                               VerticalAlignment="Center"
+                               DockPanel.Dock="Left"/>
+				</DockPanel>
+			</DockPanel>
+		</HeaderedContentControl>
+
+		<HeaderedContentControl DockPanel.Dock="Top"
+                  Margin="0,0,0,7">
+			<HeaderedContentControl.Header>
+				<TextBox z:PropertyState.VisualAnchor="{Binding ElementName=MyWindow}"
+                           z:PropertyState.Uid="myGroupBoxHeaderId-WithNamespacingAnchoredToMainWindow"
+                           z:PropertyState.Mode="Persisted"
+                           z:PropertyState.IsNamespacingEnabled="True"
+                           Text="{z:PropertyState Default=Width}"/>
+			</HeaderedContentControl.Header>
+			<DockPanel Margin="7">
+				<DockPanel DockPanel.Dock="Top"
+                           Margin="0,0,0,7">
+					<TextBlock Text="Width: 600 (Default)"
+                               VerticalAlignment="Center"
+                               DockPanel.Dock="Left"/>
+				</DockPanel>
+				<DockPanel DockPanel.Dock="Top"
+                           Margin="0,0,0,7">
+					<TextBlock Text="MinWidth: "
+                               VerticalAlignment="Center"
+                               DockPanel.Dock="Left"/>
+					<TextBlock Text="{Binding ElementName=MyWindow, Path=MinWidth, Mode=OneWay}"
+                               VerticalAlignment="Center"
+                               DockPanel.Dock="Left" />
+				</DockPanel>
+				<DockPanel DockPanel.Dock="Top">
+					<TextBlock Text="Width: "
+                               VerticalAlignment="Center"
+                               DockPanel.Dock="Left"/>
+					<TextBlock Text="{Binding ElementName=MyWindow, Path=Width, Mode=OneWay}"
+                               VerticalAlignment="Center"
+                               DockPanel.Dock="Left" />
+					<TextBlock Text=" (Element 'MyWindow' Width)"
+                               VerticalAlignment="Center"
+                               DockPanel.Dock="Left"/>
+				</DockPanel>
+			</DockPanel>
+		</HeaderedContentControl>
+
+		<Grid DockPanel.Dock="Top"
+              Margin="0,0,0,7">
+			<TabControl z:PropertyState.Uid="myTabControlId-WithoutNamespacing"
+                        z:PropertyState.Mode="Persisted"
+						z:PropertyState.IsNamespacingEnabled="False"
+						SelectedIndex="{z:PropertyState Default=0}">
+				<TabItem Header="Tab 1"
+                         Background="Red">
+					<Rectangle Margin="5" Width="20" Height="20" Fill="Red"
+                               HorizontalAlignment="Left"/>
+				</TabItem>
+				<TabItem Header="Tab 2"
+                         Background="Yellow">
+					<Rectangle Margin="5" Width="20" Height="20" Fill="Yellow"
+                               HorizontalAlignment="Left"/>
+				</TabItem>
+				<TabItem Header="Tab 3"
+                         Background="Blue">
+					<Rectangle Margin="5" Width="20" Height="20" Fill="Blue"
+                               HorizontalAlignment="Left"/>
+				</TabItem>
+			</TabControl>
+		</Grid>
+
+		<HeaderedContentControl Header="Serialize Collection"
+                  DockPanel.Dock="Top">
+			<DockPanel Margin="7">
+				<TextBlock Text="These two ComboBoxes share the same ID - they will synchronise when the app restarts (last write wins):"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           DockPanel.Dock="Top"/>
+
+				<ComboBox DockPanel.Dock="Top"
+                          Margin="0,7,0,0"
+                          z:PropertyState.Uid="myComboBoxId-WithNamespacing"
+                          z:PropertyState.Mode="Persisted"
+                          z:PropertyState.IsNamespacingEnabled="True"
+                          SelectedIndex="{z:PropertyState Default=0}">
+					<ComboBox.ItemTemplate>
+						<DataTemplate>
+							<Rectangle Margin="5" Width="20" Height="20" Fill="{Binding}"/>
+						</DataTemplate>
+					</ComboBox.ItemTemplate>
+					<ComboBoxItem>
+						<SolidColorBrush>Black</SolidColorBrush>
+					</ComboBoxItem>
+					<ComboBoxItem>
+						<SolidColorBrush>Red</SolidColorBrush>
+					</ComboBoxItem>
+					<ComboBoxItem>
+						<SolidColorBrush>Blue</SolidColorBrush>
+					</ComboBoxItem>
+				</ComboBox>
+
+				<Grid />
+			</DockPanel>
+		</HeaderedContentControl>
+
+
+		<DataGrid Background="Red" CanUserReorderColumns="True" Height="200" Width="200">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="{z:PropertyState Default='Header 1'}"
+									z:PropertyState.Uid="DataGridTextColumn-WithNamespacing"
+									z:PropertyState.Mode="Persisted"
+									z:PropertyState.IsNamespacingEnabled="True">
+
+				</DataGridTextColumn>
+				<DataGridTextColumn Header="Header 2">
+
+				</DataGridTextColumn>
+			</DataGrid.Columns>
+
+		</DataGrid>
+	</DockPanel>
+</Window>
